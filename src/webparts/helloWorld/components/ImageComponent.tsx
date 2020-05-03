@@ -2,12 +2,13 @@ import * as React from 'react';
 import { random } from '@microsoft/sp-lodash-subset';
 import { Guid, RandomNumberGenerator } from '@microsoft/sp-core-library';
 
+//properties/Parameters of the Custom component
 export  interface IImageComponentProps {
   ImageDescription:string;
   ImageType:string;
 
 }
-
+//state variables
 export interface IImageComponentState{
   StateVariable: string;
   data:any[];
@@ -19,11 +20,13 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
     super(props);
     
     this.state={
-      StateVariable:"I am initial State Image  Decriptions",
+      StateVariable:"I am initial State Image  Decriptions", ///initial state data
      data:[],
     };
-    this.changevariable=this.changevariable.bind(this);
+    this.changevariable=this.changevariable.bind(this);//this is required to bind the state data after getting setdata 
   }
+
+  //Before rendering the react element this methods running internally and store thr data in the template array.
   public componentDidMount(){
     var template=[];
     for (let index = 0; index < 10; index++) {
@@ -43,7 +46,8 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
   
      
   
-  
+  //This Method is the important method to load the React elements!!
+  //All render element must be coded inside render method.
   public render(): React.ReactElement<IImageComponentProps> {
     this.RenderVaribale += 1;
     return (
@@ -92,7 +96,7 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
     );
     
   }
-  ///Method
+  ///Method to Changed State of the variable
   private changevariable(): void {
    this.setState({
     StateVariable:"State variable changed",
