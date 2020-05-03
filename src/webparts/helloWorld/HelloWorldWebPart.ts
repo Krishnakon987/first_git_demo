@@ -9,19 +9,27 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'HelloWorldWebPartStrings';
 import HelloWorld from './components/HelloWorld';
-import { IHelloWorldProps } from './components/IHelloWorldProps';
+//import IHelloWorldProps from './components/IHelloWorldProps';
+import { ImageComponent, IImageComponentProps, IImageComponentState } from './components/ImageComponent';
 
-export interface IHelloWorldWebPartProps {
+export default interface IHelloWorldWebPartProps {
   description: string;
 }
 
-export default class HelloWorldWebPart extends BaseClientSideWebPart <IHelloWorldWebPartProps> {
+export default class HelloWorldWebPart extends BaseClientSideWebPart <IImageComponentProps> {
 
   public render(): void {
-    const element: React.ReactElement<IHelloWorldProps> = React.createElement(
-      HelloWorld,
-      {
-        description: this.properties.description
+    // const element: React.ReactElement<IHelloWorldProps> = React.createElement(
+      
+    //   HelloWorld,
+    //   {
+    //     description: this.properties.description
+    //   }
+    const element:React.ReactElement<IImageComponentProps>=React.createElement(
+      ImageComponent,{
+        ImageDescription:this.properties.ImageDescription,
+        ImageType: this.properties.ImageType,
+        
       }
     );
 
