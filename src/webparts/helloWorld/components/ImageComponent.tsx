@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { random } from '@microsoft/sp-lodash-subset';
 import { Guid, RandomNumberGenerator } from '@microsoft/sp-core-library';
-
+import { FetchAPIDemo  } from "../components/SharepointCallService";
 //properties/Parameters of the Custom component
 export  interface IImageComponentProps {
   ImageDescription:string;
@@ -25,7 +25,7 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
     };
     this.changevariable=this.changevariable.bind(this);//this is required to bind the state data after getting setdata 
   }
-
+  
   //Before rendering the react element this methods running internally and store thr data in the template array.
   public componentDidMount(){
     var template=[];
@@ -38,6 +38,7 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
           guid:Guid.newGuid().toString()
         });   
     }
+    
     setTimeout(() => {
      this.setState({data:template});
    }, 5000);
@@ -65,6 +66,7 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
       <div> <button onClick={this.changevariable}>ChangeState</button></div>
 
     <p>Render Variable:{this.RenderVaribale}</p>
+    <p><button onClick={()=>FetchAPIDemo()}>Click</button></p>
     
       </div> 
       <div>
