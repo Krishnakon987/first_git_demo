@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { random } from '@microsoft/sp-lodash-subset';
 import { Guid, RandomNumberGenerator } from '@microsoft/sp-core-library';
-import { FetchAPIDemo  } from "../components/SharepointCallService";
+import { FetchAPIDemo } from "../components/SharepointCallService";
+
 //properties/Parameters of the Custom component
 export  interface IImageComponentProps {
   ImageDescription:string;
