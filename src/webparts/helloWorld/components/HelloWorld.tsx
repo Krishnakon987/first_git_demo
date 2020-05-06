@@ -4,6 +4,7 @@ import IHelloWorldProps from './IHelloWorldProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import {ImageComponent} from './ImageComponent';
 
+
 export default class HelloWorld extends React.Component<IHelloWorldProps, {}> {
   public render(): React.ReactElement<IHelloWorldProps> {
     return (
@@ -13,6 +14,8 @@ export default class HelloWorld extends React.Component<IHelloWorldProps, {}> {
         <div className={ styles.helloWorld }>
            <div className={ styles.container }>
                    Thiss ois demo
+
+                     
            </div>
          </div>
          <div className={ styles.container }>
