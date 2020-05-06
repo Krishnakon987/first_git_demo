@@ -20,20 +20,21 @@ import  "@pnp/sp/site-users/web";
 
 export default interface IHelloWorldWebPartProps {
   description: string;
+ 
 }
 
 export default class HelloWorldWebPart extends BaseClientSideWebPart <IImageComponentProps> {
-
-  /**
+/**
    * OnInit for taking the object content of the webpart
  :Pr  */
-  public OnInit():Promise<void> {
-    return super.onInit().then(_=>{
-    sp.setup({
-      spfxContext: this.context
-    });
+ public OnInit():Promise<void> {
+  return super.onInit().then(_=>{
+  sp.setup({
+    spfxContext: this.context
   });
-  }
+});
+}
+  
   public render(): void {
     // const element: React.ReactElement<IHelloWorldProps> = React.createElement(
       
@@ -41,16 +42,17 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart <IImageComp
     //   {
     //     description: this.properties.description
     //   }
+ 
     const element:React.ReactElement<IImageComponentProps>=React.createElement(
       ImageComponent,{
         ImageDescription:this.properties.ImageDescription,
-        ImageType: this.properties.ImageType,
+        ImageType: this.properties.ImageType
         
       }
      
     );
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(element, this.domElement)
     
   }
 

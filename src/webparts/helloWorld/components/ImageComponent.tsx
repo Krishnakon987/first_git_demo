@@ -2,12 +2,14 @@ import * as React from 'react';
 import { random } from '@microsoft/sp-lodash-subset';
 import { Guid, RandomNumberGenerator } from '@microsoft/sp-core-library';
 import { sp } from '@pnp/sp';
+import { _fetchListData } from './GetCustomerListData';
 
 
 //properties/Parameters of the Custom component
 export  interface IImageComponentProps {
   ImageDescription:string;
   ImageType:string;
+ 
 
 }
 //state variables
@@ -18,9 +20,13 @@ export interface IImageComponentState{
 
 export class ImageComponent extends React.Component<IImageComponentProps,IImageComponentState> {
   private RenderVaribale= 0;
+  ItemsArray:any[];
   public constructor(props:IImageComponentProps){
     super(props);
-    
+    sp.web.lists.getByTitle("CDNDemo").items.select("Title","Modified").get().then((items:any[])=>{
+      console.log(items);
+      Response.bind(this.ItemsArray);
+    })
     this.state={
       StateVariable:"I am initial State Image  Decriptions", ///initial state data
      data:[],
@@ -53,14 +59,12 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
   //All render element must be coded inside render method.
   public render(): React.ReactElement<IImageComponentProps> {
     this.RenderVaribale += 1;
-    sp.web.lists.getByTitle("CDNDemo").items.select("Title","Modified").get().then((items:any[])=>{
-      console.log(items);
-    })
+   
     return (
      
     <React.Fragment>
     
-    
+    {this.ItemsArray}
     <div>
        I am content of Image Component!!!
        <div> Image Description: {this.props.ImageDescription}</div>
@@ -68,7 +72,7 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
        Image Description Variable={this.state.StateVariable}
 
 
-      <div> <button onClick={this.changevariable}>ChangeState</button></div>
+      <div> <button onClick={()=>_fetchListData()}>ChangeState</button></div>
 
     <p>Render Variable:{this.RenderVaribale}</p>
    
