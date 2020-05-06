@@ -11,6 +11,12 @@ import * as strings from 'HelloWorldWebPartStrings';
 import HelloWorld from './components/HelloWorld';
 //import IHelloWorldProps from './components/IHelloWorldProps';
 import { ImageComponent, IImageComponentProps, IImageComponentState } from './components/ImageComponent';
+import {sp} from '@pnp/sp';
+import  "@pnp/sp/webs";
+import  "@pnp/sp/lists";
+import  "@pnp/sp/items/list";
+import  "@pnp/sp/site-users/web";
+
 
 export default interface IHelloWorldWebPartProps {
   description: string;
@@ -18,6 +24,16 @@ export default interface IHelloWorldWebPartProps {
 
 export default class HelloWorldWebPart extends BaseClientSideWebPart <IImageComponentProps> {
 
+  /**
+   * OnInit for taking the object content of the webpart
+ :Pr  */
+  public OnInit():Promise<void> {
+    return super.onInit().then(_=>{
+    sp.setup({
+      spfxContext: this.context
+    });
+  });
+  }
   public render(): void {
     // const element: React.ReactElement<IHelloWorldProps> = React.createElement(
       
@@ -31,9 +47,11 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart <IImageComp
         ImageType: this.properties.ImageType,
         
       }
+     
     );
 
     ReactDom.render(element, this.domElement);
+    
   }
 
   protected onDispose(): void {

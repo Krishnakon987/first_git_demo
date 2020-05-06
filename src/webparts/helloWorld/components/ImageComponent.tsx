@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { random } from '@microsoft/sp-lodash-subset';
 import { Guid, RandomNumberGenerator } from '@microsoft/sp-core-library';
-import { FetchAPIDemo } from "../components/SharepointCallService";
+import { sp } from '@pnp/sp';
+
 
 //properties/Parameters of the Custom component
 export  interface IImageComponentProps {
@@ -52,6 +53,9 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
   //All render element must be coded inside render method.
   public render(): React.ReactElement<IImageComponentProps> {
     this.RenderVaribale += 1;
+    sp.web.lists.getByTitle("CDNDemo").items.select("Title","Modified").get().then((items:any[])=>{
+      console.log(items);
+    })
     return (
      
     <React.Fragment>
@@ -67,7 +71,7 @@ export class ImageComponent extends React.Component<IImageComponentProps,IImageC
       <div> <button onClick={this.changevariable}>ChangeState</button></div>
 
     <p>Render Variable:{this.RenderVaribale}</p>
-    <p><button onClick={()=>FetchAPIDemo()}>Click</button></p>
+   
     
       </div> 
       <div>
